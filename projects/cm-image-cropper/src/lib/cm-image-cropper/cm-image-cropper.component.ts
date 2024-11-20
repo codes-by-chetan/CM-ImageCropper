@@ -18,7 +18,7 @@ interface AspectRatioOption {
 }
 
 @Component({
-  selector: 'lib-cm-image-cropper',
+  selector: 'cm-image-cropper',
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
