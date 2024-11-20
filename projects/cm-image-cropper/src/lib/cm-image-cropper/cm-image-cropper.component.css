@@ -1,0 +1,159 @@
+.image-cropper-container {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .image-cropper-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .image-cropper-body {
+      padding: 20px;
+    }
+    .upload-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .upload-label {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .upload-input {
+      display: none;
+    }
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    .tab-button {
+      padding: 10px 15px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+    .tab-button.active {
+      opacity: 1;
+      border-bottom: 2px solid #007bff;
+    }
+    .tab-content {
+      margin-bottom: 20px;
+    }
+    .tab-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .button-group {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .aspect-ratio-button, .flip-button {
+      padding: 5px 10px;
+      border: 1px solid #007bff;
+      background-color: #fff;
+      color: #007bff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .aspect-ratio-button.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .crop-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .image-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    .crop-box {
+      position: absolute;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 9999em rgba(0, 0, 0, 0.5);
+      cursor: move;
+    }
+    .resize-handle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      border: 1px solid #007bff;
+    }
+    .top-left { top: -5px; left: -5px; cursor: nwse-resize; }
+    .top-right { top: -5px; right: -5px; cursor: nesw-resize; }
+    .bottom-left { bottom: -5px; left: -5px; cursor: nesw-resize; }
+    .bottom-right { bottom: -5px; right: -5px; cursor: nwse-resize; }
+    .top { top: -5px; left: 50%; transform: translateX(-50%); cursor: ns-resize; }
+    .right { top: 50%; right: -5px; transform: translateY(-50%); cursor: ew-resize; }
+    .bottom { bottom: -5px; left: 50%; transform: translateX(-50%); cursor: ns-resize; }
+    .left { top: 50%; left: -5px; transform: translateY(-50%); cursor: ew-resize; }
+    .action-button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .action-button.primary {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .action-button.secondary {
+      background-color: #6c757d;
+      color: #fff;
+    }
+    .action-button.warning {
+      background-color: #ffc107;
+      color: #000;
+    }
+    .preview-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .preview-image {
+      max-width: 100%;
+      border-radius: 4px;
+    }
+    .upload-button {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    @media (max-width: 480px) {
+      .image-cropper-container {
+        padding: 10px;
+      }
+      .button-group {
+        flex-direction: column;
+      }
+      .action-button {
+        width: 100%;
+      }
+    }

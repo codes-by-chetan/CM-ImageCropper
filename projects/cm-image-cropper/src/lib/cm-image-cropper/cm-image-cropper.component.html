@@ -1,0 +1,99 @@
+<div class="image-cropper-container">
+  <div class="image-cropper-card">
+    <div class="image-cropper-body">
+      <ng-container *ngIf="!imageUrl; else cropperTemplate">
+        <div class="upload-container">
+          <label for="image-upload" class="upload-label">Upload Image</label>
+          <input id="image-upload" type="file" (change)="onFileSelected($event)" accept="image/*" class="upload-input">
+        </div>
+      </ng-container>
+      
+      <ng-template #cropperTemplate>
+        <div class="tabs">
+          <button *ngIf="config.showCrop" class="tab-button" [class.active]="activeTab === 'crop'" (click)="activeTab = 'crop'">Crop</button>
+          <button *ngIf="config.showRotate" class="tab-button" [class.active]="activeTab === 'rotate'" (click)="activeTab = 'rotate'">Rotate</button>
+          <button *ngIf="config.showFlip" class="tab-button" [class.active]="activeTab === 'flip'" (click)="activeTab = 'flip'">Flip</button>
+          <button *ngIf="config.showBrightness || config.showContrast || config.showSaturation" class="tab-button" [class.active]="activeTab === 'adjust'" (click)="activeTab = 'adjust'">Adjust</button>
+        </div>
+        
+        <div class="tab-content">
+          <div *ngIf="activeTab === 'crop'" class="tab-pane">
+            <div class="control-group">
+              <label>Aspect Ratio</label>
+              <div class="button-group">
+                <button *ngFor="let ratio of aspectRatioOptions" 
+                        class="aspect-ratio-button" 
+                        [class.active]="aspectRatio === ratio.value"
+                        (click)="setAspectRatio(ratio.value)">
+                  {{ratio.label}}
+                </button>
+              </div>
+            </div>
+            <div *ngIf="config.showZoom" class="control-group">
+              <label for="zoom">Zoom</label>
+              <input id="zoom" type="range" min="1" max="3" step="0.1" [(ngModel)]="zoom" (input)="updateCrop()">
+            </div>
+          </div>
+          <div *ngIf="activeTab === 'rotate'" class="tab-pane">
+            <div class="control-group">
+              <label for="rotation">Rotation</label>
+              <input id="rotation" type="range" min="0" max="360" step="1" [(ngModel)]="rotation" (input)="updateCrop()">
+            </div>
+          </div>
+          <div *ngIf="activeTab === 'flip'" class="tab-pane">
+            <div class="control-group">
+              <button class="flip-button" (click)="flipHorizontal()">Flip Horizontal</button>
+              <button class="flip-button" (click)="flipVertical()">Flip Vertical</button>
+            </div>
+          </div>
+          <div *ngIf="activeTab === 'adjust'" class="tab-pane">
+            <div *ngIf="config.showBrightness" class="control-group">
+              <label for="brightness">Brightness</label>
+              <input id="brightness" type="range" min="0" max="2" step="0.1" [(ngModel)]="brightness" (input)="updateCrop()">
+            </div>
+            <div *ngIf="config.showContrast" class="control-group">
+              <label for="contrast">Contrast</label>
+              <input id="contrast" type="range" min="0" max="2" step="0.1" [(ngModel)]="contrast" (input)="updateCrop()">
+            </div>
+            <div *ngIf="config.showSaturation" class="control-group">
+              <label for="saturation">Saturation</label>
+              <input id="saturation" type="range" min="0" max="2" step="0.1" [(ngModel)]="saturation" (input)="updateCrop()">
+            </div>
+          </div>
+        </div>
+        
+        <div class="crop-container">
+          <div class="image-container" #imageContainer>
+            <img #sourceImage [src]="imageUrl" (load)="onImageLoad()" [style.transform]="getImageTransform()">
+            <div #cropBox class="crop-box" [style.width.px]="cropWidth" [style.height.px]="cropHeight"
+                 [style.left.px]="cropX" [style.top.px]="cropY">
+              <div class="resize-handle top-left" (mousedown)="onResizeStart($event, 'top-left')"></div>
+              <div class="resize-handle top-right" (mousedown)="onResizeStart($event, 'top-right')"></div>
+              <div class="resize-handle bottom-left" (mousedown)="onResizeStart($event, 'bottom-left')"></div>
+              <div class="resize-handle bottom-right" (mousedown)="onResizeStart($event, 'bottom-right')"></div>
+              <div *ngIf="aspectRatio === 0" class="resize-handle top" (mousedown)="onResizeStart($event, 'top')"></div>
+              <div *ngIf="aspectRatio === 0" class="resize-handle right" (mousedown)="onResizeStart($event, 'right')"></div>
+              <div *ngIf="aspectRatio === 0" class="resize-handle bottom" (mousedown)="onResizeStart($event, 'bottom')"></div>
+              <div *ngIf="aspectRatio === 0" class="resize-handle left" (mousedown)="onResizeStart($event, 'left')"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="button-group">
+          <button class="action-button secondary" (click)="cancelCrop()">Cancel</button>
+          <button class="action-button warning" (click)="resetChanges()">Reset Changes</button>
+          <button class="action-button primary" (click)="applyChanges()">Apply Changes</button>
+        </div>
+        
+        <div *ngIf="croppedImageUrl" class="preview-container">
+          <h5>Preview</h5>
+          <img [src]="croppedImageUrl" alt="Cropped image" class="preview-image">
+        </div>
+        
+        <div class="upload-container">
+          <button class="upload-button" (click)="uploadImage()">Upload Image</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
